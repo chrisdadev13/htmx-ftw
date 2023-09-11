@@ -4,9 +4,6 @@ import { db } from "../db";
 import { SelectTodo, todos } from "../db/schema";
 
 export default async () => {
-  const data = await fetch("http://localhost:3000/api/example");
-  const greeting = await data.json();
-
   const todosList = await db.select().from(todos).all();
   return (
     <html>
@@ -14,8 +11,6 @@ export default async () => {
         <title>Index</title>
       </head>
       <body>
-        <h1>{greeting.msg} esta es tu TODO list</h1>
-        <a href="/about">About</a>
         <TodoList todos={todosList} />
         <TodoForm />
       </body>
@@ -33,7 +28,7 @@ function TodoList({ todos }: { todos: SelectTodo[] }) {
   );
 }
 
-function TodoItem({ content, completed, id }: SelectTodo) {
+export function TodoItem({ content, completed, id }: SelectTodo) {
   return (
     <div class="flex flex-row space-x-3">
       <p>{content}</p>
