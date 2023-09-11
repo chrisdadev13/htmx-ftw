@@ -1,3 +1,4 @@
+// Landing Page (http://localhost:3000 - index.tsx)
 import * as elements from "typed-html";
 
 export default async () => {
