@@ -14,8 +14,10 @@ export default async () => {
         <title>Index</title>
       </head>
       <body>
-        <h1>{greeting.msg}</h1>
+        <h1>{greeting.msg} esta es tu TODO list</h1>
+        <a href="/about">About</a>
         <TodoList todos={todosList} />
+        <TodoForm />
       </body>
     </html>
   );
@@ -51,5 +53,20 @@ function TodoItem({ content, completed, id }: SelectTodo) {
         X
       </button>
     </div>
+  );
+}
+
+function TodoForm() {
+  return (
+    <form
+      class="flex flex-row space-x-3"
+      hx-post="http://localhost:3000/api/todos"
+      hx-swap="beforebegin"
+      hx-target="body"
+      _="on submit target.reset()"
+    >
+      <input type="text" name="content" class="border border-black" />
+      <button type="submit">Add</button>
+    </form>
   );
 }
