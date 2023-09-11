@@ -3,6 +3,8 @@ import { FileSystemRouter } from "bun";
 import { BaseHtml } from "./html";
 import { html } from "@elysiajs/html";
 import * as elements from "typed-html";
+import { drizzle } from "drizzle-orm/libsql";
+import { client } from "./db/drizzle.config";
 
 const router = async (
   request: Request,
@@ -47,6 +49,8 @@ const router = async (
 
   return data;
 };
+
+export const db = drizzle(client);
 
 new Elysia()
   .use(html())
