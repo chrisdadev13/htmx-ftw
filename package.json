@@ -18,6 +18,7 @@
     "@elysiajs/html": "^0.6.4",
     "@libsql/client": "^0.3.3",
     "drizzle-orm": "^0.28.6",
-    "elysia": "^0.6.20"
+    "elysia": "^0.6.20",
+    "elysia-autoroutes": "^0.2.2"
   }
 }
