@@ -45,7 +45,7 @@ export function TodoItem({ content, completed, id }: SelectTodo) {
       />
       <button
         class="text-red-500"
-        hx-delete={`/todos/${id}`}
+        hx-delete={`http://localhost:3000/api/todos/${id}`}
         hx-swap="outerHTML"
         hx-target="closest div"
       >
