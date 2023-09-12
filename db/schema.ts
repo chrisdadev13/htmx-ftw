@@ -1,11 +1,28 @@
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text, blob } from "drizzle-orm/sqlite-core";
 
-export const todos = sqliteTable("todos", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  content: text("content").notNull(),
-  completed: integer("completed", { mode: "boolean" }).notNull().default(false),
+export const user = sqliteTable("user", {
+  id: text("id").primaryKey(),
+  // other user attributes
 });
 
-export type SelectTodo = InferSelectModel<typeof todos>;
-export type InsertTodo = InferInsertModel<typeof todos>;
+export const session = sqliteTable("user_session", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id),
+  activeExpires: blob("active_expires", {
+    mode: "bigint",
+  }).notNull(),
+  idleExpires: blob("idle_expires", {
+    mode: "bigint",
+  }).notNull(),
+});
+
+export const key = sqliteTable("user_key", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id),
+  hashedPassword: text("hashed_password"),
+});
